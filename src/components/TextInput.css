@@ -1,0 +1,43 @@
+.text-input {
+  border: 1px solid red;
+  width: 100%;
+}
+
+.input-area:focus {
+  outline: none;
+}
+
+[contenteditable="true"]:empty::before {
+  pointer-events: none;
+  display: block; /* For Firefox */
+  color: grey;
+  font-style: italic;
+}
+
+[contenteditable="true"]:hover:empty::before {
+  color: lightgray;
+  transition: 0.2s;
+}
+
+.note-heading:empty::before {
+  content: "Title...";
+}
+
+.note-paragraph:empty::before {
+  content: "Add your text here...";
+}
+
+.note-heading {
+  padding: 1rem 1.5rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.note-paragraph {
+  min-height: 200px;
+  font-size: 1.3rem;
+  padding: 1rem 1.6rem;
+  hyphens: auto;
+  hyphenate-character: "-";
+  text-align: justify;
+}
