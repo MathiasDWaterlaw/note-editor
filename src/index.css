@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Gentium+Book+Plus:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
+:root {
+  --white: #fefdfc;
+  --black: #201d1e;
+}
+
 *,
 *::after,
 *::before {
@@ -15,6 +20,18 @@ body {
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: whitesmoke;
-  color: #231f20;
+  --background-color: #fefdfc;
+  --foreground-color: #201d1e;
+}
+
+body.dark {
+  --background-color: #201d1e;
+  --foreground-color: #fefdfc;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
 }

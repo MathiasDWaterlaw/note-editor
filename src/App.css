@@ -1,16 +1,54 @@
 .App {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   min-height: 100vh;
   padding: 0 12rem;
+  background-color: var(--background-color);
+  color: var(--foreground-color);
+}
+
+nav {
+  padding: 1.2rem;
+}
+
+nav ul {
+  justify-content: space-between;
+}
+
+nav li {
+  /* border: 1px solid green; */
 }
 
 main {
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   display: flex;
   width: 100%;
-  min-height: 100vh;
+  min-height: 80vh;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+}
+
+footer {
+  /* border: 1px salmon solid; */
+  padding: 1rem;
+  padding-bottom: 1.5rem;
+}
+
+footer ul {
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+footer li {
+  border-bottom: 1px solid var(--foreground-color);
+  cursor: pointer;
+}
+
+footer li:hover,
+footer li:active {
+  border-bottom: 1px solid transparent;
+  transition: 0.2s;
 }
 
 @media (width <= 992px) {

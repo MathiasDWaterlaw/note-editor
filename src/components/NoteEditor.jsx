@@ -1,7 +1,7 @@
-import "../components/TextInput.css";
+import "./NoteEditor.css";
 import { useState, useEffect } from "react";
 
-function TextInput() {
+function NoteEditor() {
   const [headingState, setHeadingState] = useState("");
   const [paragraphState, setParagraphState] = useState("");
 
@@ -15,7 +15,7 @@ function TextInput() {
   }, [headingState, paragraphState]);
 
   return (
-    <div className='text-input'>
+    <div className='NoteEditor'>
       <div
         className='input-area note-heading'
         contentEditable
@@ -34,4 +34,4 @@ function TextInput() {
   );
 }
 
-export default TextInput;
+export default NoteEditor;

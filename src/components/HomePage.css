@@ -1,0 +1,11 @@
+.HomePage {
+  /* border: 1px solid red; */
+  width: 100%;
+}
+
+.home-heading {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  font-size: 4rem;
+}
