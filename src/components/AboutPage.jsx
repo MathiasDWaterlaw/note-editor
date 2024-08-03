@@ -5,8 +5,8 @@ function AboutPage() {
     <div className='AboutPage'>
       <h1>Notes</h1>
       <p>
-        It's a project developed by Mathias Dell'Osa taking inspiration from
-        Scrivi.la by Riccardo Palombo.
+        It's a project that take inspiration from Scrivi.la by Riccardo Palombo.
+        Was developed by Mathias Dell'Osa using React.js
       </p>
     </div>
   );

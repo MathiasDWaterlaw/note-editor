@@ -1,9 +1,8 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faHouse } from "@fortawesome/free-solid-svg-icons";
-import NavigationBar from "./components/NavigationBar";
+import { Routes, Route, Link, useLocation } from "react-router-dom";
+
+import NavigationBarHandler from "./components/NavigationBar";
 import NoteEditor from "./components/NoteEditor";
 import HomePage from "./components/HomePage";
 import AboutPage from "./components/AboutPage";
@@ -13,6 +12,7 @@ const body = document.body;
 function App() {
   const [darkState, setDarkState] = useState(false);
   const [textMode, setTextMode] = useState("Dark Mode");
+  const currentPath = useLocation();
 
   useEffect(() => {
     if (darkState) {
@@ -26,12 +26,7 @@ function App() {
 
   return (
     <div className='App'>
-      <NavigationBar
-        icons={[
-          <FontAwesomeIcon icon={faHouse} size='xl' />,
-          <FontAwesomeIcon icon={faPen} size='xl' />,
-        ]}
-      />
+      <NavigationBarHandler path={currentPath.pathname} />
 
       <main className='main-content'>
         <Routes>

@@ -39,4 +39,5 @@ ul {
 .nav-item {
   text-decoration: none;
   color: var(--foreground-color);
+  cursor: pointer;
 }
