@@ -1,10 +1,26 @@
 .NoteEditor {
   /* border: 1px solid red; */
   width: 100%;
+  margin-top: 1.5rem;
 }
 
 .input-area:focus {
   outline: none;
+}
+
+.note-heading {
+  padding: 1rem 1.5rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.note-paragraph {
+  min-height: 200px;
+  font-size: 1.2rem;
+  padding: 1rem 1.6rem;
+  hyphens: auto;
+  hyphenate-character: "-";
+  text-align: justify;
 }
 
 [contenteditable="true"]:empty::before {
@@ -25,19 +41,4 @@
 
 .note-paragraph:empty::before {
   content: "Add your text here...";
-}
-
-.note-heading {
-  padding: 1rem 1.5rem;
-  font-size: 1.8rem;
-  font-weight: bold;
-}
-
-.note-paragraph {
-  min-height: 200px;
-  font-size: 1.3rem;
-  padding: 1rem 1.6rem;
-  hyphens: auto;
-  hyphenate-character: "-";
-  text-align: justify;
 }

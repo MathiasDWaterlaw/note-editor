@@ -6,18 +6,6 @@
   color: var(--foreground-color);
 }
 
-nav {
-  padding: 1.2rem;
-}
-
-nav ul {
-  justify-content: space-between;
-}
-
-nav li {
-  /* border: 1px solid green; */
-}
-
 main {
   /* border: 1px solid blue; */
   display: flex;
@@ -30,8 +18,7 @@ main {
 
 footer {
   /* border: 1px salmon solid; */
-  padding: 1rem;
-  padding-bottom: 1.5rem;
+  padding: 0.5rem 0 1.5rem 0;
 }
 
 footer ul {

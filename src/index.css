@@ -35,3 +35,8 @@ ul {
   margin: 0;
   display: flex;
 }
+
+.nav-item {
+  text-decoration: none;
+  color: var(--foreground-color);
+}
