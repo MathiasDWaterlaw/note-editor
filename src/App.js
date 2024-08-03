@@ -1,28 +1,16 @@
 import "./App.css";
-import { useState, useEffect } from "react";
-import { Routes, Route, Link, useLocation } from "react-router-dom";
+
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import NavigationBarHandler from "./components/NavigationBar";
-import NoteEditor from "./components/NoteEditor";
 import HomePage from "./components/HomePage";
+import NoteEditor from "./components/NoteEditor";
+import NoteArchive from "./components/NoteArchive";
 import AboutPage from "./components/AboutPage";
-
-const body = document.body;
+import Footer from "./components/Footer";
 
 function App() {
-  const [darkState, setDarkState] = useState(false);
-  const [textMode, setTextMode] = useState("Dark Mode");
   const currentPath = useLocation();
-
-  useEffect(() => {
-    if (darkState) {
-      body.classList.add("dark");
-      setTextMode("Light Mode");
-    } else {
-      body.classList.remove("dark");
-      setTextMode("Dark Mode");
-    }
-  }, [darkState]);
 
   return (
     <div className='App'>
@@ -33,19 +21,11 @@ function App() {
           <Route path='/' element={<HomePage />} />
           <Route path='/note-editor' element={<NoteEditor />} />
           <Route path='/about' element={<AboutPage />} />
+          <Route path='/notes-archive' element={<NoteArchive />} />
         </Routes>
       </main>
 
-      <footer className='Footer'>
-        <ul>
-          <li>
-            <Link to='/about' className='nav-item'>
-              About
-            </Link>
-          </li>
-          <li onClick={() => setDarkState(!darkState)}>{textMode}</li>
-        </ul>
-      </footer>
+      <Footer />
     </div>
   );
 }

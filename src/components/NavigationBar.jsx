@@ -1,15 +1,13 @@
 import "./NavigationBar.css";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPen,
   faHouse,
-  faFloppyDisk,
   faFileArrowDown,
   faTrashCan,
-  faBoxArchive,
   faFileCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
 
 function HomePageNav() {
   return (
@@ -17,7 +15,8 @@ function HomePageNav() {
       <ul>
         <li></li>
       </ul>
-      <ul>
+
+      <ul className='nav-left-ul'>
         <li>
           <Link to='/note-editor' className='nav-item'>
             <FontAwesomeIcon icon={faPen} size='xl' />
@@ -56,7 +55,7 @@ function NoteEditorNav() {
   );
 }
 
-function AboutPageNav() {
+function AboutAndArchiveNav() {
   return (
     <nav className='AboutPageNav'>
       <ul>
@@ -83,8 +82,8 @@ function NavigationBarHandler({ path }) {
     return <HomePageNav />;
   } else if (path === "/note-editor") {
     return <NoteEditorNav />;
-  } else if (path === "/about") {
-    return <AboutPageNav />;
+  } else if (path === "/about" || path === "/notes-archive") {
+    return <AboutAndArchiveNav />;
   }
 }
 

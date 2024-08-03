@@ -16,28 +16,6 @@ main {
   flex-direction: column;
 }
 
-footer {
-  /* border: 1px salmon solid; */
-  padding: 0.5rem 0 1.5rem 0;
-}
-
-footer ul {
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
-
-footer li {
-  border-bottom: 1px solid var(--foreground-color);
-  cursor: pointer;
-}
-
-footer li:hover,
-footer li:active {
-  border-bottom: 1px solid transparent;
-  transition: 0.2s;
-}
-
 @media (width <= 992px) {
   .App {
     padding: 0 9rem;
