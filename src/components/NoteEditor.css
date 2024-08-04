@@ -4,6 +4,20 @@
   margin-top: 1.5rem;
 }
 
+.grow-wrap {
+  /* easy way to plop the elements on top of each other and have them both sized based on the tallest one's height */
+  display: grid;
+}
+.grow-wrap::after {
+  /* Note the weird space! Needed to preventy jumpy behavior */
+  content: attr(data-replicated-value) " ";
+  white-space: pre-wrap;
+
+  /* Hidden from view, clicks, and screen readers */
+  visibility: hidden;
+  grid-area: 1 / 1 / 2 / 2;
+}
+
 textarea::-webkit-scrollbar {
   width: 0;
 }
@@ -13,11 +27,15 @@ textarea::-webkit-scrollbar {
 }
 
 .input-area {
+  /* border: none; */
   background-color: var(--background-color);
   color: var(--foreground-color);
   width: 100%;
   padding: 1rem 1.5rem;
+  overflow: hidden;
+  min-height: fit-content;
   resize: none;
+  grid-area: 1 / 1 / 2 / 2;
 }
 
 .input-area::placeholder {
@@ -36,7 +54,8 @@ textarea::-webkit-scrollbar {
 }
 
 .note-paragraph {
-  min-height: 200px;
+  /* min-height: 200px; */
+
   font-size: 1.2rem;
   hyphens: auto;
   hyphenate-character: "-";
