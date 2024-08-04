@@ -9,6 +9,8 @@ import {
   faFileCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
 
+import { useHeading, useParagraph } from "../context/NoteContext";
+
 function HomePageNav() {
   return (
     <nav className='HomePageNav'>
@@ -28,6 +30,8 @@ function HomePageNav() {
 }
 
 function NoteEditorNav() {
+  const [headingState, setHeadingState] = useHeading();
+  const [paragraphState, setParagraphState] = useParagraph();
   return (
     <nav>
       <ul>
@@ -43,7 +47,13 @@ function NoteEditorNav() {
           <FontAwesomeIcon icon={faFileArrowDown} size='xl' />
         </li>
 
-        <li className='nav-item'>
+        <li
+          className='nav-item'
+          onClick={() => {
+            setHeadingState("");
+            setParagraphState("");
+          }}
+        >
           <FontAwesomeIcon icon={faTrashCan} size='xl' />
         </li>
 

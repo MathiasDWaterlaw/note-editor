@@ -2,6 +2,8 @@ import "./App.css";
 
 import { Routes, Route, useLocation } from "react-router-dom";
 
+import NoteContextProvider from "./context/NoteContext";
+
 import NavigationBarHandler from "./components/NavigationBar";
 import HomePage from "./components/HomePage";
 import NoteEditor from "./components/NoteEditor";
@@ -14,18 +16,20 @@ function App() {
 
   return (
     <div className='App'>
-      <NavigationBarHandler path={currentPath.pathname} />
+      <NoteContextProvider>
+        <NavigationBarHandler path={currentPath.pathname} />
 
-      <main className='main-content'>
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/note-editor' element={<NoteEditor />} />
-          <Route path='/about' element={<AboutPage />} />
-          <Route path='/notes-archive' element={<NoteArchive />} />
-        </Routes>
-      </main>
+        <main className='main-content'>
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/note-editor' element={<NoteEditor />} />
+            <Route path='/notes-archive' element={<NoteArchive />} />
+            <Route path='/about' element={<AboutPage />} />
+          </Routes>
+        </main>
 
-      <Footer />
+        <Footer />
+      </NoteContextProvider>
     </div>
   );
 }

@@ -1,9 +1,10 @@
 import "./NoteEditor.css";
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useHeading, useParagraph } from "../context/NoteContext";
 
 function NoteEditor() {
-  const [headingState, setHeadingState] = useState("");
-  const [paragraphState, setParagraphState] = useState("");
+  const [headingState, setHeadingState] = useHeading();
+  const [paragraphState, setParagraphState] = useParagraph();
 
   useEffect(() => {
     if (headingState !== "") {
@@ -16,20 +17,26 @@ function NoteEditor() {
 
   return (
     <div className='NoteEditor'>
-      <div
+      <textarea
+        // ref={headingRef}
         className='input-area note-heading'
-        contentEditable
-        onInput={(e) => {
-          setHeadingState(e.target.innerText);
+        // contentEditable
+        onChange={(e) => {
+          setHeadingState(e.target.value);
         }}
-      ></div>
-      <div
+        value={headingState}
+        placeholder='Title...'
+        rows={1}
+      ></textarea>
+
+      <textarea
         className='input-area note-paragraph'
-        contentEditable
-        onInput={(e) => {
-          setParagraphState(e.target.innerText);
+        onChange={(e) => {
+          setParagraphState(e.target.value);
         }}
-      ></div>
+        placeholder='Add your text here...'
+        value={paragraphState}
+      ></textarea>
     </div>
   );
 }

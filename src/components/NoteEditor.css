@@ -4,28 +4,48 @@
   margin-top: 1.5rem;
 }
 
+textarea::-webkit-scrollbar {
+  width: 0;
+}
+
 .input-area:focus {
   outline: none;
 }
 
-.note-heading {
+.input-area {
+  background-color: var(--background-color);
+  color: var(--foreground-color);
+  width: 100%;
   padding: 1rem 1.5rem;
+  resize: none;
+}
+
+.input-area::placeholder {
+  color: gray;
+  font-style: italic;
+}
+
+.input-area:hover::placeholder {
+  color: lightgray;
+}
+
+.note-heading {
   font-size: 1.8rem;
   font-weight: bold;
+  /* height: 80px; */
 }
 
 .note-paragraph {
   min-height: 200px;
   font-size: 1.2rem;
-  padding: 1rem 1.6rem;
   hyphens: auto;
   hyphenate-character: "-";
   text-align: justify;
 }
 
-[contenteditable="true"]:empty::before {
+/* [contenteditable="true"]:empty::before {
   pointer-events: none;
-  display: block; /* For Firefox */
+  display: block;
   color: grey;
   font-style: italic;
 }
@@ -41,4 +61,4 @@
 
 .note-paragraph:empty::before {
   content: "Add your text here...";
-}
+} */
