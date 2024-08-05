@@ -4,13 +4,15 @@
   padding: 0 12rem;
   background-color: var(--background-color);
   color: var(--foreground-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 main {
   /* border: 1px solid blue; */
   display: flex;
   width: 100%;
-  min-height: 80vh;
   align-items: center;
   justify-content: center;
   flex-direction: column;

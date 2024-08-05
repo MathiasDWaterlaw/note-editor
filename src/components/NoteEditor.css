@@ -1,25 +1,6 @@
 .NoteEditor {
-  /* border: 1px solid red; */
+  /* border: 1px solid white; */
   width: 100%;
-  margin-top: 1.5rem;
-}
-
-.grow-wrap {
-  /* easy way to plop the elements on top of each other and have them both sized based on the tallest one's height */
-  display: grid;
-}
-.grow-wrap::after {
-  /* Note the weird space! Needed to preventy jumpy behavior */
-  content: attr(data-replicated-value) " ";
-  white-space: pre-wrap;
-
-  /* Hidden from view, clicks, and screen readers */
-  visibility: hidden;
-  grid-area: 1 / 1 / 2 / 2;
-}
-
-textarea::-webkit-scrollbar {
-  width: 0;
 }
 
 .input-area:focus {
@@ -27,15 +8,13 @@ textarea::-webkit-scrollbar {
 }
 
 .input-area {
-  /* border: none; */
+  border: none;
   background-color: var(--background-color);
   color: var(--foreground-color);
   width: 100%;
   padding: 1rem 1.5rem;
-  overflow: hidden;
-  min-height: fit-content;
+  overflow-y: hidden;
   resize: none;
-  grid-area: 1 / 1 / 2 / 2;
 }
 
 .input-area::placeholder {
@@ -50,34 +29,12 @@ textarea::-webkit-scrollbar {
 .note-heading {
   font-size: 1.8rem;
   font-weight: bold;
-  /* height: 80px; */
 }
 
 .note-paragraph {
-  /* min-height: 200px; */
-
+  padding: 1rem 1.6rem;
   font-size: 1.2rem;
   hyphens: auto;
   hyphenate-character: "-";
   text-align: justify;
 }
-
-/* [contenteditable="true"]:empty::before {
-  pointer-events: none;
-  display: block;
-  color: grey;
-  font-style: italic;
-}
-
-[contenteditable="true"]:hover:empty::before {
-  color: lightgray;
-  transition: 0.2s;
-}
-
-.note-heading:empty::before {
-  content: "Title...";
-}
-
-.note-paragraph:empty::before {
-  content: "Add your text here...";
-} */

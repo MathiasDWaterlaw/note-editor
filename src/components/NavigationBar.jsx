@@ -32,6 +32,12 @@ function HomePageNav() {
 function NoteEditorNav() {
   const [headingState, setHeadingState] = useHeading();
   const [paragraphState, setParagraphState] = useParagraph();
+
+  // future function to add:
+  const downloadFile = () => {};
+  const saveCurrentFile = () => {};
+  const deleteCurrentFile = () => {};
+
   return (
     <nav>
       <ul>
