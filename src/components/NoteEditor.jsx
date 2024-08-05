@@ -19,7 +19,6 @@ function NoteEditor() {
   return (
     <div className='NoteEditor'>
       <TextareaAutosize
-        ref={headingRef}
         className='input-area note-heading'
         onChange={(e) => {
           setHeadingState(e.target.value);
@@ -30,7 +29,6 @@ function NoteEditor() {
       ></TextareaAutosize>
 
       <TextareaAutosize
-        ref={paragraphRef}
         className='input-area note-paragraph'
         onChange={(e) => {
           setParagraphState(e.target.value);
