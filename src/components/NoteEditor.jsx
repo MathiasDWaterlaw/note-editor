@@ -1,27 +1,36 @@
 import "./NoteEditor.css";
-import { useEffect } from "react";
-import { useHeading, useParagraph } from "../context/NoteContext";
+import { useEffect, useState } from "react";
+
+import {
+  useHeading,
+  useParagraph,
+  useNoteObject,
+} from "../context/NoteContext";
+
 import TextareaAutosize from "react-textarea-autosize";
+import { text } from "@fortawesome/fontawesome-svg-core";
 
 function NoteEditor() {
+  // global
   const [headingState, setHeadingState] = useHeading();
   const [paragraphState, setParagraphState] = useParagraph();
+  const { noteObject, setNoteObject } = useNoteObject();
 
   useEffect(() => {
-    if (headingState !== "") {
-      console.log(headingState);
-    }
-    if (paragraphState !== "") {
-      console.log(paragraphState);
-    }
-  }, [headingState, paragraphState]);
+    console.log(noteObject);
+  }, [headingState, paragraphState, noteObject]);
 
   return (
     <div className='NoteEditor'>
       <TextareaAutosize
         className='input-area note-heading'
+        onFocus={() => {}}
         onChange={(e) => {
           setHeadingState(e.target.value);
+          setNoteObject({
+            ...noteObject,
+            note: { title: e.target.value, content: paragraphState },
+          });
         }}
         value={headingState}
         placeholder='Title...'
@@ -32,6 +41,10 @@ function NoteEditor() {
         className='input-area note-paragraph'
         onChange={(e) => {
           setParagraphState(e.target.value);
+          setNoteObject({
+            ...noteObject,
+            note: { title: headingState, content: e.target.value },
+          });
         }}
         placeholder='Add your text here...'
         value={paragraphState}

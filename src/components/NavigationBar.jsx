@@ -9,9 +9,15 @@ import {
   faFileCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { useHeading, useParagraph } from "../context/NoteContext";
+import {
+  useHeading,
+  useNoteObject,
+  useParagraph,
+} from "../context/NoteContext";
 
-function HomePageNav() {
+function HomePageNav({ createNewNoteObject }) {
+  const { setNoteObject } = useNoteObject();
+
   return (
     <nav className='HomePageNav'>
       <ul>
@@ -20,7 +26,11 @@ function HomePageNav() {
 
       <ul className='nav-left-ul'>
         <li>
-          <Link to='/note-editor' className='nav-item'>
+          <Link
+            to='/note-editor'
+            className='nav-item'
+            onClick={() => setNoteObject(createNewNoteObject())}
+          >
             <FontAwesomeIcon icon={faPen} size='xl' />
           </Link>
         </li>
@@ -29,14 +39,8 @@ function HomePageNav() {
   );
 }
 
-function NoteEditorNav() {
-  const [headingState, setHeadingState] = useHeading();
-  const [paragraphState, setParagraphState] = useParagraph();
-
-  // future function to add:
-  const downloadFile = () => {};
-  const saveCurrentFile = () => {};
-  const deleteCurrentFile = () => {};
+function NoteEditorNav({ createNewNoteObject }) {
+  const { setNoteObject } = useNoteObject();
 
   return (
     <nav>
@@ -49,21 +53,19 @@ function NoteEditorNav() {
       </ul>
 
       <ul className='nav-left-ul'>
-        <li className='nav-item'>
+        <li id='download-note-btn' className='nav-item'>
           <FontAwesomeIcon icon={faFileArrowDown} size='xl' />
         </li>
 
         <li
+          id='delete-note-btn'
           className='nav-item'
-          onClick={() => {
-            setHeadingState("");
-            setParagraphState("");
-          }}
+          onClick={() => setNoteObject(createNewNoteObject())}
         >
           <FontAwesomeIcon icon={faTrashCan} size='xl' />
         </li>
 
-        <li className='nav-item'>
+        <li id='save-note-btn' className='nav-item'>
           <FontAwesomeIcon icon={faFileCirclePlus} size='xl' />
         </li>
       </ul>
@@ -71,7 +73,9 @@ function NoteEditorNav() {
   );
 }
 
-function AboutAndArchiveNav() {
+function AboutAndArchiveNav({ createNewNoteObject }) {
+  const { setNoteObject } = useNoteObject();
+
   return (
     <nav className='AboutPageNav'>
       <ul>
@@ -84,7 +88,11 @@ function AboutAndArchiveNav() {
 
       <ul>
         <li>
-          <Link to='/note-editor' className='nav-item'>
+          <Link
+            to='/note-editor'
+            className='nav-item'
+            onClick={() => setNoteObject(createNewNoteObject())}
+          >
             <FontAwesomeIcon icon={faPen} size='xl' />
           </Link>
         </li>
@@ -93,14 +101,16 @@ function AboutAndArchiveNav() {
   );
 }
 
-function NavigationBarHandler({ path }) {
+export default function NavigationBarHandler({ path }) {
+  const [headingState, setHeadingState] = useHeading();
+  const [paragraphState, setParagraphState] = useParagraph();
+  const { createNewNoteObject } = useNoteObject();
+
   if (path === "/") {
-    return <HomePageNav />;
+    return <HomePageNav createNewNoteObject={createNewNoteObject} />;
   } else if (path === "/note-editor") {
-    return <NoteEditorNav />;
+    return <NoteEditorNav createNewNoteObject={createNewNoteObject} />;
   } else if (path === "/about" || path === "/notes-archive") {
-    return <AboutAndArchiveNav />;
+    return <AboutAndArchiveNav createNewNoteObject={createNewNoteObject} />;
   }
 }
-
-export default NavigationBarHandler;

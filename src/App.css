@@ -1,5 +1,4 @@
 .App {
-  /* border: 1px solid red; */
   min-height: 100vh;
   padding: 0 12rem;
   background-color: var(--background-color);
@@ -10,7 +9,6 @@
 }
 
 main {
-  /* border: 1px solid blue; */
   display: flex;
   width: 100%;
   align-items: center;
