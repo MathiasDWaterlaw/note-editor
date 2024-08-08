@@ -15,8 +15,12 @@ import {
   useParagraph,
 } from "../context/NoteContext";
 
+import useLocalStorage from "../custom-hooks/useLocalStorage";
+
 function HomePageNav({ createNewNoteObject }) {
   const { setNoteObject } = useNoteObject();
+
+  const [, getDraft] = useLocalStorage("draft");
 
   return (
     <nav className='HomePageNav'>
@@ -25,6 +29,13 @@ function HomePageNav({ createNewNoteObject }) {
       </ul>
 
       <ul className='nav-left-ul'>
+        {getDraft().state && (
+          <li>
+            <div className='draft-alert'>
+              <p>You have a draft!</p>
+            </div>
+          </li>
+        )}
         <li>
           <Link
             to='/note-editor'
@@ -75,6 +86,7 @@ function NoteEditorNav({ createNewNoteObject }) {
 
 function AboutAndArchiveNav({ createNewNoteObject }) {
   const { setNoteObject } = useNoteObject();
+  const [, getDraft] = useLocalStorage("draft");
 
   return (
     <nav className='AboutPageNav'>
@@ -86,7 +98,14 @@ function AboutAndArchiveNav({ createNewNoteObject }) {
         </li>
       </ul>
 
-      <ul>
+      <ul className='nav-left-ul'>
+        {getDraft().state && (
+          <li>
+            <div className='draft-alert'>
+              <p>You have a draft!</p>
+            </div>
+          </li>
+        )}
         <li>
           <Link
             to='/note-editor'

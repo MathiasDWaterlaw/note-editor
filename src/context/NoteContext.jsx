@@ -4,10 +4,20 @@ const HeadingContext = createContext();
 const ParagraphContext = createContext();
 const NoteObjectContext = createContext();
 
+const NOTE_OBJECT_INITIAL_STATE = {
+  id: crypto.randomUUID(),
+  date: Date(),
+  note: {
+    title: "",
+    content: "",
+  },
+};
+
 export default function NoteContextProvider({ children }) {
   const [headingState, setHeadingState] = useState("");
   const [paragraphState, setParagraphState] = useState("");
-  const [noteObject, setNoteObject] = useState();
+
+  const [noteObject, setNoteObject] = useState(NOTE_OBJECT_INITIAL_STATE);
 
   const createNewNoteObject = () => {
     setHeadingState("");

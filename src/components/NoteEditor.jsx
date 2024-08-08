@@ -1,5 +1,6 @@
 import "./NoteEditor.css";
 import { useEffect, useState } from "react";
+import TextareaAutosize from "react-textarea-autosize";
 
 import {
   useHeading,
@@ -7,24 +8,41 @@ import {
   useNoteObject,
 } from "../context/NoteContext";
 
-import TextareaAutosize from "react-textarea-autosize";
-import { text } from "@fortawesome/fontawesome-svg-core";
+import useLocalStorage from "../custom-hooks/useLocalStorage";
 
 function NoteEditor() {
+  // local storage
+  const [setDraft, getDraft] = useLocalStorage("draft");
+
   // global
   const [headingState, setHeadingState] = useHeading();
   const [paragraphState, setParagraphState] = useParagraph();
   const { noteObject, setNoteObject } = useNoteObject();
 
   useEffect(() => {
-    console.log(noteObject);
+    const draft = getDraft();
+
+    if (draft) {
+      if (draft.state) {
+        setNoteObject(draft.draftNoteObject);
+        setHeadingState(draft.draftNoteObject.note.title);
+        setParagraphState(draft.draftNoteObject.note.content);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (headingState !== "" || paragraphState !== "") {
+      setDraft({ state: true, draftNoteObject: noteObject });
+    } else {
+      setDraft({ state: false, draftNoteObject: "" });
+    }
   }, [headingState, paragraphState, noteObject]);
 
   return (
     <div className='NoteEditor'>
       <TextareaAutosize
         className='input-area note-heading'
-        onFocus={() => {}}
         onChange={(e) => {
           setHeadingState(e.target.value);
           setNoteObject({

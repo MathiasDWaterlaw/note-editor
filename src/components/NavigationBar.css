@@ -2,6 +2,33 @@ nav {
   padding: 2rem 1.5rem 4rem 1.5rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.draft-alert {
+  position: relative;
+  border: 1.5px solid var(--foreground-color);
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* bubble speech triangle */
+.draft-alert::after {
+  margin: 0;
+  content: "";
+  width: 12px;
+  height: 12px;
+  background-color: var(--background-color);
+  color: var(--background-color);
+  position: absolute;
+  border-right: 0px solid transparent;
+  border-bottom: 0px solid transparent;
+  border-top: 1.5px solid var(--foreground-color);
+  border-left: 1.5px solid var(--foreground-color);
+  right: -7px;
+  bottom: 13.5px;
+  transform: rotate(135deg);
 }
 
 .nav-left-ul {
