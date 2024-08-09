@@ -9,17 +9,13 @@ import {
   faFileCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
 
-import {
-  useHeading,
-  useNoteObject,
-  useParagraph,
-} from "../context/NoteContext";
+import { useNoteObject } from "../context/NoteContext";
 
 import useLocalStorage from "../custom-hooks/useLocalStorage";
 
-function HomePageNav({ createNewNoteObject }) {
-  const { setNoteObject } = useNoteObject();
-
+// Home Page navigation bar
+function HomePageNav() {
+  const { setNoteObject, createNewNoteObject } = useNoteObject();
   const [, getDraft] = useLocalStorage("draft");
 
   return (
@@ -29,7 +25,7 @@ function HomePageNav({ createNewNoteObject }) {
       </ul>
 
       <ul className='nav-left-ul'>
-        {getDraft().state && (
+        {getDraft() && getDraft().state && (
           <li>
             <div className='draft-alert'>
               <p>You have a draft!</p>
@@ -50,8 +46,21 @@ function HomePageNav({ createNewNoteObject }) {
   );
 }
 
-function NoteEditorNav({ createNewNoteObject }) {
-  const { setNoteObject } = useNoteObject();
+// Note Editor navigation bar
+function NoteEditorNav() {
+  const { setNoteObject, createNewNoteObject } = useNoteObject();
+  const [setDraft] = useLocalStorage("draft");
+
+  const deleteNote = () => {
+    // ma prima dovrà cercare, usando il note-object corrente, l'id univoco e cancellarlo dall'indice.
+    // A quel punto risettare tutto come di seguito.
+
+    setNoteObject(createNewNoteObject());
+    setDraft({ state: false, draft_note: "" });
+  };
+
+  // saveNote farà praticemente l'esatto opposto di deleteNote e poi resetterà tutto.
+  // magari sposto il resetting in una funzione apposita così evito di riscriverla.
 
   return (
     <nav>
@@ -71,7 +80,9 @@ function NoteEditorNav({ createNewNoteObject }) {
         <li
           id='delete-note-btn'
           className='nav-item'
-          onClick={() => setNoteObject(createNewNoteObject())}
+          onClick={() => {
+            deleteNote();
+          }}
         >
           <FontAwesomeIcon icon={faTrashCan} size='xl' />
         </li>
@@ -84,8 +95,9 @@ function NoteEditorNav({ createNewNoteObject }) {
   );
 }
 
-function AboutAndArchiveNav({ createNewNoteObject }) {
-  const { setNoteObject } = useNoteObject();
+// About Page and Note Archive navigation bar
+function AboutAndArchiveNav() {
+  const { setNoteObject, createNewNoteObject } = useNoteObject();
   const [, getDraft] = useLocalStorage("draft");
 
   return (
@@ -99,7 +111,7 @@ function AboutAndArchiveNav({ createNewNoteObject }) {
       </ul>
 
       <ul className='nav-left-ul'>
-        {getDraft().state && (
+        {getDraft() && getDraft().state && (
           <li>
             <div className='draft-alert'>
               <p>You have a draft!</p>
@@ -121,15 +133,11 @@ function AboutAndArchiveNav({ createNewNoteObject }) {
 }
 
 export default function NavigationBarHandler({ path }) {
-  const [headingState, setHeadingState] = useHeading();
-  const [paragraphState, setParagraphState] = useParagraph();
-  const { createNewNoteObject } = useNoteObject();
-
   if (path === "/") {
-    return <HomePageNav createNewNoteObject={createNewNoteObject} />;
+    return <HomePageNav />;
   } else if (path === "/note-editor") {
-    return <NoteEditorNav createNewNoteObject={createNewNoteObject} />;
+    return <NoteEditorNav />;
   } else if (path === "/about" || path === "/notes-archive") {
-    return <AboutAndArchiveNav createNewNoteObject={createNewNoteObject} />;
+    return <AboutAndArchiveNav />;
   }
 }

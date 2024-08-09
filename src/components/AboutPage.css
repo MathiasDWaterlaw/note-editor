@@ -13,3 +13,7 @@
   hyphenate-character: "-";
   text-align: justify;
 }
+
+.AboutPage a {
+  text-decoration: underline;
+}

@@ -18,10 +18,9 @@ body {
   margin: 0;
   font-weight: 400;
   font-style: normal;
+  min-width: 290px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  min-width: 290px;
 
   --background-color: #fefdfc;
   --foreground-color: #201d1e;

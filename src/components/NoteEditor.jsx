@@ -14,28 +14,30 @@ function NoteEditor() {
   // local storage
   const [setDraft, getDraft] = useLocalStorage("draft");
 
-  // global
+  // global context
   const [headingState, setHeadingState] = useHeading();
   const [paragraphState, setParagraphState] = useParagraph();
   const { noteObject, setNoteObject } = useNoteObject();
 
+  // on component load
   useEffect(() => {
     const draft = getDraft();
 
     if (draft) {
       if (draft.state) {
-        setNoteObject(draft.draftNoteObject);
-        setHeadingState(draft.draftNoteObject.note.title);
-        setParagraphState(draft.draftNoteObject.note.content);
+        setHeadingState(draft.draft_note.title);
+        setParagraphState(draft.draft_note.content);
+        setNoteObject(draft.draft_note);
       }
     }
   }, []);
 
+  // every time occur a change in heading, paragraph or note-object
   useEffect(() => {
     if (headingState !== "" || paragraphState !== "") {
-      setDraft({ state: true, draftNoteObject: noteObject });
+      setDraft({ state: true, draft_note: noteObject });
     } else {
-      setDraft({ state: false, draftNoteObject: "" });
+      setDraft({ state: false, draft_note: "" });
     }
   }, [headingState, paragraphState, noteObject]);
 
@@ -47,7 +49,8 @@ function NoteEditor() {
           setHeadingState(e.target.value);
           setNoteObject({
             ...noteObject,
-            note: { title: e.target.value, content: paragraphState },
+            title: e.target.value,
+            content: paragraphState,
           });
         }}
         value={headingState}
@@ -61,7 +64,7 @@ function NoteEditor() {
           setParagraphState(e.target.value);
           setNoteObject({
             ...noteObject,
-            note: { title: headingState, content: e.target.value },
+            content: e.target.value,
           });
         }}
         placeholder='Add your text here...'
