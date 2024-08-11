@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 const indexedDB =
   window.indexedDB ||
   window.webkitIndexedDB ||
@@ -5,6 +7,7 @@ const indexedDB =
   window.msIndexedDB ||
   window.shimIndexedDB;
 
+// this open a new database whenever the app is loaded
 export default function useNotesDB() {
   if (!indexedDB) {
     return console.error("Your browser do not support IndexedDB");
@@ -34,6 +37,7 @@ export default function useNotesDB() {
   };
 }
 
+// function that needs a value to add at the database
 export function saveInDB(noteObject) {
   const request = indexedDB.open("Notes_archive");
 
@@ -53,4 +57,35 @@ export function saveInDB(noteObject) {
       db.close();
     };
   };
+}
+
+// function that gets all the files from the database
+export function useAllNotes() {
+  const [allNotes, setAllNotes] = useState([]);
+  const request = indexedDB.open("Notes_archive");
+
+  useEffect(() => {
+    request.onerror = (event) => {
+      console.error("An error occured with IndexedDB");
+      console.error(event);
+    };
+
+    request.onsuccess = () => {
+      const db = request.result;
+      const transaction = db.transaction("notes", "readonly");
+      const store = transaction.objectStore("notes");
+
+      const getAllNotes = store.getAll();
+
+      getAllNotes.onsuccess = () => {
+        setAllNotes(getAllNotes.result);
+      };
+
+      transaction.oncomplete = () => {
+        db.close();
+      };
+    };
+  }, []);
+
+  return allNotes;
 }
