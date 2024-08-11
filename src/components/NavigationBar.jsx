@@ -12,6 +12,7 @@ import {
 import { useNoteObject } from "../context/NoteContext";
 
 import useLocalStorage from "../custom-hooks/useLocalStorage";
+import { saveInDB } from "../custom-hooks/useNotesDB";
 
 // Home Page navigation bar
 function HomePageNav() {
@@ -48,7 +49,7 @@ function HomePageNav() {
 
 // Note Editor navigation bar
 function NoteEditorNav() {
-  const { setNoteObject, createNewNoteObject } = useNoteObject();
+  const { noteObject, setNoteObject, createNewNoteObject } = useNoteObject();
   const [setDraft] = useLocalStorage("draft");
 
   const deleteNote = () => {
@@ -59,6 +60,10 @@ function NoteEditorNav() {
     setDraft({ state: false, draft_note: "" });
   };
 
+  const saveNote = () => {
+    saveInDB(noteObject);
+    setDraft({ state: false, draft_note: "" });
+  };
   // saveNote farà praticemente l'esatto opposto di deleteNote e poi resetterà tutto.
   // magari sposto il resetting in una funzione apposita così evito di riscriverla.
 
@@ -73,9 +78,9 @@ function NoteEditorNav() {
       </ul>
 
       <ul className='nav-left-ul'>
-        <li id='download-note-btn' className='nav-item'>
+        {/* <li id='download-note-btn' className='nav-item'>
           <FontAwesomeIcon icon={faFileArrowDown} size='xl' />
-        </li>
+        </li> */}
 
         <li
           id='delete-note-btn'
@@ -87,7 +92,7 @@ function NoteEditorNav() {
           <FontAwesomeIcon icon={faTrashCan} size='xl' />
         </li>
 
-        <li id='save-note-btn' className='nav-item'>
+        <li id='save-note-btn' className='nav-item' onClick={saveNote}>
           <FontAwesomeIcon icon={faFileCirclePlus} size='xl' />
         </li>
       </ul>

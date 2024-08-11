@@ -1,5 +1,5 @@
 import "./NoteEditor.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 
 import {
