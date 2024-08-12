@@ -37,7 +37,7 @@ export default function useNotesDB() {
   };
 }
 
-// function that needs a value to add at the database
+// function that needs a value to add in the database
 export function saveInDB(noteObject) {
   const request = indexedDB.open("Notes_archive");
 
@@ -60,7 +60,7 @@ export function saveInDB(noteObject) {
 }
 
 // function that gets all the files from the database
-export function useAllNotes() {
+export function useGetAllDB() {
   const [allNotes, setAllNotes] = useState([]);
   const request = indexedDB.open("Notes_archive");
 
@@ -89,3 +89,9 @@ export function useAllNotes() {
 
   return allNotes;
 }
+
+// funzioni ancora da scrivere:
+
+// 1 - una funzione che cancella una specifica nota dal database;
+// 2 - una funzione che faccia l'updated di una nota specifica;
+// 3 - una funzione che cerchi se una nota esiste nel database;

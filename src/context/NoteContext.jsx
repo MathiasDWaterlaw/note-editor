@@ -5,7 +5,7 @@ const ParagraphContext = createContext();
 const NoteObjectContext = createContext();
 
 const NOTE_OBJECT_INITIAL_STATE = {
-  id: crypto.randomUUID(),
+  key: crypto.randomUUID(),
   timestamp: new Date().getTime(),
   title: "",
   content: "",
@@ -19,10 +19,10 @@ export default function NoteContextProvider({ children }) {
   const createNewNoteObject = () => {
     setHeadingState("");
     setParagraphState("");
-    const _id = crypto.randomUUID();
+    const _key = crypto.randomUUID();
     const _timestamp = new Date().getTime();
     const _noteObject = {
-      id: _id,
+      key: _key,
       timestamp: _timestamp,
       title: headingState,
       content: paragraphState,

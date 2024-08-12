@@ -32,6 +32,10 @@ function NoteEditor() {
     }
   }, []);
 
+  useEffect(() => {
+    console.log(noteObject);
+  }, [noteObject]);
+
   // every time occur a change in heading, paragraph or note-object
   useEffect(() => {
     if (headingState !== "" || paragraphState !== "") {

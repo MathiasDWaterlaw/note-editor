@@ -12,7 +12,10 @@ import {
 import { useNoteObject } from "../context/NoteContext";
 
 import useLocalStorage from "../custom-hooks/useLocalStorage";
-import { saveInDB } from "../custom-hooks/useNotesDB";
+
+import { addNote } from "../dexie-notes-db/notes-db";
+
+// import { saveInDB } from "../custom-hooks/useNotesDB";
 
 // Home Page navigation bar
 function HomePageNav() {
@@ -50,6 +53,7 @@ function HomePageNav() {
 // Note Editor navigation bar
 function NoteEditorNav() {
   const { noteObject, setNoteObject, createNewNoteObject } = useNoteObject();
+  const emptyDraft = { state: false, draft_note: "" };
   const [setDraft] = useLocalStorage("draft");
 
   const deleteNote = () => {
@@ -57,12 +61,13 @@ function NoteEditorNav() {
     // A quel punto risettare tutto come di seguito.
 
     setNoteObject(createNewNoteObject());
-    setDraft({ state: false, draft_note: "" });
+    setDraft(emptyDraft);
   };
 
   const saveNote = () => {
-    saveInDB(noteObject);
-    setDraft({ state: false, draft_note: "" });
+    // saveInDB(noteObject);
+    addNote(noteObject);
+    setDraft(emptyDraft);
   };
   // saveNote farà praticemente l'esatto opposto di deleteNote e poi resetterà tutto.
   // magari sposto il resetting in una funzione apposita così evito di riscriverla.

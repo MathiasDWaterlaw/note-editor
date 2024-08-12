@@ -1,16 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import "./NoteArchive.css";
 
-import { useAllNotes } from "../custom-hooks/useNotesDB";
+import NoteItemDisplay from "./NoteItemDisplay";
+
+import { db } from "../dexie-notes-db/notes-db";
+import { useLiveQuery } from "dexie-react-hooks";
 
 function NoteArchive() {
-  // const [allNotes, setAllNotes] = useState();
-  const allNotes = useAllNotes();
+  const allNotes = useLiveQuery(() => db.notes.toArray());
 
   useEffect(() => {
     console.log(allNotes);
-  });
+  }, []);
 
-  if (allNotes.length === 0) {
+  if (allNotes?.length === 0) {
     return (
       <div className='NoteArchive'>
         <p>You don't have any saved note yet</p>
@@ -18,15 +21,9 @@ function NoteArchive() {
     );
   } else {
     return (
-      <div className='NoteArchive'>
-        {allNotes
-          .sort((a, b) => b.timestamp - a.timestamp)
-          .map((note) => (
-            <div className='note' key={note.id}>
-              <h4>{note.title}</h4>
-            </div>
-          ))}
-      </div>
+      <ul className='NoteArchive'>
+        {allNotes?.map((note) => <NoteItemDisplay note={note} />).reverse()}
+      </ul>
     );
   }
 }
