@@ -166,7 +166,7 @@ function NoteEditorNav() {
 }
 
 export default function NavigationBarHandler({ path }) {
-  if (path === "/") {
+  if (path === "/home") {
     return <HomePageNav />;
   } else if (path === "/notes-editor") {
     return <NoteEditorNav />;
