@@ -1,7 +1,7 @@
 {
   "name": "note-editor",
   "version": "0.1.0",
-  "homepage": "https://mathiasdwaterlaw.github.io/note-editor/",
+  "homepage": "https://mathiasdwaterlaw.github.io/note-editor",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
