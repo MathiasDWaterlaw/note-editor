@@ -21,7 +21,7 @@ function App() {
         <main className='main-content'>
           <Routes>
             <Route path='/' element={<HomePage />} />
-            <Route path='/note-editor' element={<NoteEditor />} />
+            <Route path='/notes-editor' element={<NoteEditor />} />
             <Route path='/notes-archive' element={<NoteArchive />} />
             <Route path='/about' element={<AboutPage />} />
           </Routes>

@@ -26,7 +26,7 @@ export default function NoteItemDisplay({ note }) {
   return (
     <li id={note.key} className='ListItem'>
       <Link
-        to='/note-editor'
+        to='/notes-editor'
         className='note-item-link'
         onClick={() => {
           setNoteEditor(note);

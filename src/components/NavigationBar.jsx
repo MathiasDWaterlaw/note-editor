@@ -40,7 +40,7 @@ function HomePageNav() {
         )}
         <li>
           <Link
-            to='/note-editor'
+            to='/notes-editor'
             className='nav-item'
             onClick={() => setNoteObject(createNewNoteObject())}
           >
@@ -77,7 +77,7 @@ function AboutAndArchiveNav() {
         )}
         <li>
           <Link
-            to='/note-editor'
+            to='/notes-editor'
             className='nav-item'
             onClick={() => setNoteObject(createNewNoteObject())}
           >
@@ -168,7 +168,7 @@ function NoteEditorNav() {
 export default function NavigationBarHandler({ path }) {
   if (path === "/") {
     return <HomePageNav />;
-  } else if (path === "/note-editor") {
+  } else if (path === "/notes-editor") {
     return <NoteEditorNav />;
   } else if (path === "/about" || path === "/notes-archive") {
     return <AboutAndArchiveNav />;
