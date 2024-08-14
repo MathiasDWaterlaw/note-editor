@@ -61,7 +61,7 @@ function AboutAndArchiveNav() {
     <nav className='AboutPageNav'>
       <ul>
         <li>
-          <Link to='/' className='nav-item'>
+          <Link to='/home' className='nav-item'>
             <FontAwesomeIcon icon={faHouse} size='xl' />
           </Link>
         </li>
@@ -120,7 +120,7 @@ function NoteEditorNav() {
       <ul>
         <li>
           <Link
-            to='/'
+            to='/home'
             className='nav-item'
             onClick={() => {
               if ("id" in noteObject) {
