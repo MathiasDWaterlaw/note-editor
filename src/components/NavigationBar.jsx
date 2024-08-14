@@ -50,6 +50,43 @@ function HomePageNav() {
   );
 }
 
+// About Page and Note Archive navigation bar
+function AboutAndArchiveNav() {
+  const { setNoteObject, createNewNoteObject } = useNoteObject();
+  const [, getDraft] = useLocalStorage("draft");
+
+  return (
+    <nav className='AboutPageNav'>
+      <ul>
+        <li>
+          <Link to='/' className='nav-item'>
+            <FontAwesomeIcon icon={faHouse} size='xl' />
+          </Link>
+        </li>
+      </ul>
+
+      <ul className='nav-left-ul'>
+        {getDraft() && getDraft().state && (
+          <li>
+            <div className='draft-alert'>
+              <p>You have a draft!</p>
+            </div>
+          </li>
+        )}
+        <li>
+          <Link
+            to='/note-editor'
+            className='nav-item'
+            onClick={() => setNoteObject(createNewNoteObject())}
+          >
+            <FontAwesomeIcon icon={faPen} size='xl' />
+          </Link>
+        </li>
+      </ul>
+    </nav>
+  );
+}
+
 // Note Editor navigation bar
 function NoteEditorNav() {
   const { noteObject, setNoteObject, createNewNoteObject } = useNoteObject();
@@ -84,8 +121,8 @@ function NoteEditorNav() {
 
       <ul className='nav-left-ul'>
         {/* <li id='download-note-btn' className='nav-item'>
-          <FontAwesomeIcon icon={faFileArrowDown} size='xl' />
-        </li> */}
+            <FontAwesomeIcon icon={faFileArrowDown} size='xl' />
+          </li> */}
 
         <li
           id='delete-note-btn'
@@ -99,43 +136,6 @@ function NoteEditorNav() {
 
         <li id='save-note-btn' className='nav-item' onClick={saveNote}>
           <FontAwesomeIcon icon={faFileCirclePlus} size='xl' />
-        </li>
-      </ul>
-    </nav>
-  );
-}
-
-// About Page and Note Archive navigation bar
-function AboutAndArchiveNav() {
-  const { setNoteObject, createNewNoteObject } = useNoteObject();
-  const [, getDraft] = useLocalStorage("draft");
-
-  return (
-    <nav className='AboutPageNav'>
-      <ul>
-        <li>
-          <Link to='/' className='nav-item'>
-            <FontAwesomeIcon icon={faHouse} size='xl' />
-          </Link>
-        </li>
-      </ul>
-
-      <ul className='nav-left-ul'>
-        {getDraft() && getDraft().state && (
-          <li>
-            <div className='draft-alert'>
-              <p>You have a draft!</p>
-            </div>
-          </li>
-        )}
-        <li>
-          <Link
-            to='/note-editor'
-            className='nav-item'
-            onClick={() => setNoteObject(createNewNoteObject())}
-          >
-            <FontAwesomeIcon icon={faPen} size='xl' />
-          </Link>
         </li>
       </ul>
     </nav>

@@ -4,33 +4,39 @@ import {
   useHeading,
   useParagraph,
 } from "../context/NoteContext";
-import { useEffect } from "react";
 
 export default function NoteItemDisplay({ note }) {
-  const { noteObject, setNoteObject } = useNoteObject();
-  const [headingState, setHeadingState] = useHeading();
-  const [paragraphState, setParagraphState] = useParagraph();
+  const { setNoteObject } = useNoteObject();
+  const [, setHeadingState] = useHeading();
+  const [, setParagraphState] = useParagraph();
 
-  const fromStampToDate = (timestamp) => {};
-
-  const goToNoteEditor = (_note) => {
+  const setNoteEditor = (_note) => {
     setNoteObject(_note);
     setHeadingState(_note.title);
     setParagraphState(_note.content);
   };
 
+  const date = new Date(note.timestamp);
+  const day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+  const month =
+    date.getMonth() < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+  const year = date.getFullYear();
+  const fullDate = `${day}/${month}/${year}`;
+
+  console.log(fullDate);
+
   return (
-    <li key={note.key} className='ListItem'>
+    <li id={note.key} className='ListItem'>
       <Link
         to='/note-editor'
         className='note-item-link'
         onClick={() => {
-          goToNoteEditor(note);
+          setNoteEditor(note);
         }}
       >
         <div className='NoteItem'>
-          <h4>{note.title}</h4>
-          <p>{note.timestamp}</p>
+          <h3>{note.title}</h3>
+          <p>{fullDate}</p>
         </div>
       </Link>
     </li>

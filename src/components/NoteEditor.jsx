@@ -38,10 +38,14 @@ function NoteEditor() {
 
   // every time occur a change in heading, paragraph or note-object
   useEffect(() => {
-    if (headingState !== "" || paragraphState !== "") {
-      setDraft({ state: true, draft_note: noteObject });
-    } else {
+    if ("id" in noteObject) {
       setDraft({ state: false, draft_note: "" });
+    } else {
+      if (headingState !== "" || paragraphState !== "") {
+        setDraft({ state: true, draft_note: noteObject });
+      } else {
+        setDraft({ state: false, draft_note: "" });
+      }
     }
   }, [headingState, paragraphState, noteObject]);
 

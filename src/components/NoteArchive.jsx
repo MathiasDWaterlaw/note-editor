@@ -21,9 +21,18 @@ function NoteArchive() {
     );
   } else {
     return (
-      <ul className='NoteArchive'>
-        {allNotes?.map((note) => <NoteItemDisplay note={note} />).reverse()}
-      </ul>
+      <>
+        <header>
+          <h2>- Archive -</h2>
+        </header>
+        <ul className='NoteArchive'>
+          {allNotes?.map((note) => <NoteItemDisplay note={note} />).reverse()}
+        </ul>
+        <div className='flex-container'>
+          {/* <h5 className='nav-item'>EXPORT ALL</h5> */}
+          <h5 className='nav-item'>DELETE ALL</h5>
+        </div>
+      </>
     );
   }
 }
