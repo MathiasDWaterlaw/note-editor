@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/note-editor/static/css/main.d979925f.css",
-    "main.js": "/note-editor/static/js/main.88f9b9d5.js",
-    "static/js/453.4e8ddc89.chunk.js": "/note-editor/static/js/453.4e8ddc89.chunk.js",
-    "index.html": "/note-editor/index.html",
-    "main.d979925f.css.map": "/note-editor/static/css/main.d979925f.css.map",
-    "main.88f9b9d5.js.map": "/note-editor/static/js/main.88f9b9d5.js.map",
-    "453.4e8ddc89.chunk.js.map": "/note-editor/static/js/453.4e8ddc89.chunk.js.map"
+    "main.css": "/home/static/css/main.d979925f.css",
+    "main.js": "/home/static/js/main.de630cbe.js",
+    "static/js/453.4e8ddc89.chunk.js": "/home/static/js/453.4e8ddc89.chunk.js",
+    "index.html": "/home/index.html",
+    "main.d979925f.css.map": "/home/static/css/main.d979925f.css.map",
+    "main.de630cbe.js.map": "/home/static/js/main.de630cbe.js.map",
+    "453.4e8ddc89.chunk.js.map": "/home/static/js/453.4e8ddc89.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d979925f.css",
-    "static/js/main.88f9b9d5.js"
+    "static/js/main.de630cbe.js"
   ]
 }
