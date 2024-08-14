@@ -61,7 +61,7 @@ function AboutAndArchiveNav() {
     <nav className='AboutPageNav'>
       <ul>
         <li>
-          <Link to='/home' className='nav-item'>
+          <Link to='/' className='nav-item'>
             <FontAwesomeIcon icon={faHouse} size='xl' />
           </Link>
         </li>
@@ -120,7 +120,7 @@ function NoteEditorNav() {
       <ul>
         <li>
           <Link
-            to='/home'
+            to='/'
             className='nav-item'
             onClick={() => {
               if ("id" in noteObject) {
@@ -166,7 +166,7 @@ function NoteEditorNav() {
 }
 
 export default function NavigationBarHandler({ path }) {
-  if (path === "/home") {
+  if (path === "/") {
     return <HomePageNav />;
   } else if (path === "/notes-editor") {
     return <NoteEditorNav />;
