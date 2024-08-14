@@ -23,8 +23,6 @@ export default function NoteItemDisplay({ note }) {
   const year = date.getFullYear();
   const fullDate = `${day}/${month}/${year}`;
 
-  console.log(fullDate);
-
   return (
     <li id={note.key} className='ListItem'>
       <Link

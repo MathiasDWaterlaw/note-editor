@@ -13,7 +13,11 @@ import { useNoteObject } from "../context/NoteContext";
 
 import useLocalStorage from "../custom-hooks/useLocalStorage";
 
-import { addNote } from "../dexie-notes-db/notes-db";
+import {
+  addNoteToDB,
+  deleteNoteFromDB,
+  updateNoteInDB,
+} from "../dexie-notes-db/notes-db";
 
 // import { saveInDB } from "../custom-hooks/useNotesDB";
 
@@ -93,17 +97,24 @@ function NoteEditorNav() {
   const emptyDraft = { state: false, draft_note: "" };
   const [setDraft] = useLocalStorage("draft");
 
-  const deleteNote = () => {
-    // ma prima dovrà cercare, usando il note-object corrente, l'id univoco e cancellarlo dall'indice.
-    // A quel punto risettare tutto come di seguito.
-
+  const deleteNote = (_noteObject) => {
+    if ("id" in _noteObject) {
+      deleteNoteFromDB(_noteObject.id);
+    }
     setNoteObject(createNewNoteObject());
     setDraft(emptyDraft);
   };
 
-  const saveNote = () => {
+  const saveNote = (_noteObject) => {
     // saveInDB(noteObject);
-    addNote(noteObject);
+    if ("id" in _noteObject) {
+      updateNoteInDB(_noteObject.id, {
+        title: _noteObject.title,
+        content: _noteObject.content,
+      });
+    } else {
+      addNoteToDB(_noteObject);
+    }
     setDraft(emptyDraft);
   };
   // saveNote farà praticemente l'esatto opposto di deleteNote e poi resetterà tutto.
@@ -113,7 +124,18 @@ function NoteEditorNav() {
     <nav>
       <ul>
         <li>
-          <Link to='/' className='nav-item'>
+          <Link
+            to='/'
+            className='nav-item'
+            onClick={() => {
+              if ("id" in noteObject) {
+                updateNoteInDB(noteObject.id, {
+                  title: noteObject.title,
+                  content: noteObject.content,
+                });
+              }
+            }}
+          >
             <FontAwesomeIcon icon={faHouse} size='xl' />
           </Link>
         </li>
@@ -128,13 +150,19 @@ function NoteEditorNav() {
           id='delete-note-btn'
           className='nav-item'
           onClick={() => {
-            deleteNote();
+            deleteNote(noteObject);
           }}
         >
           <FontAwesomeIcon icon={faTrashCan} size='xl' />
         </li>
 
-        <li id='save-note-btn' className='nav-item' onClick={saveNote}>
+        <li
+          id='save-note-btn'
+          className='nav-item'
+          onClick={() => {
+            saveNote(noteObject);
+          }}
+        >
           <FontAwesomeIcon icon={faFileCirclePlus} size='xl' />
         </li>
       </ul>
