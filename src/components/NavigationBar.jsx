@@ -1,16 +1,16 @@
 import "./NavigationBar.css";
 import { Link } from "react-router-dom";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPen,
   faHouse,
-  faFileArrowDown,
+  // faFileArrowDown,
   faTrashCan,
   faFileCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { useNoteObject } from "../context/NoteContext";
-
 import useLocalStorage from "../custom-hooks/useLocalStorage";
 
 import {
@@ -18,8 +18,6 @@ import {
   deleteNoteFromDB,
   updateNoteInDB,
 } from "../dexie-notes-db/notes-db";
-
-// import { saveInDB } from "../custom-hooks/useNotesDB";
 
 // Home Page navigation bar
 function HomePageNav() {
@@ -106,7 +104,6 @@ function NoteEditorNav() {
   };
 
   const saveNote = (_noteObject) => {
-    // saveInDB(noteObject);
     if ("id" in _noteObject) {
       updateNoteInDB(_noteObject.id, {
         title: _noteObject.title,
@@ -117,8 +114,6 @@ function NoteEditorNav() {
     }
     setDraft(emptyDraft);
   };
-  // saveNote farà praticemente l'esatto opposto di deleteNote e poi resetterà tutto.
-  // magari sposto il resetting in una funzione apposita così evito di riscriverla.
 
   return (
     <nav>

@@ -1,9 +1,6 @@
 import "./App.css";
 
-import { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-
-// import useNotesDB from "./custom-hooks/useNotesDB";
 import NoteContextProvider from "./context/NoteContext";
 
 import NavigationBarHandler from "./components/NavigationBar";
@@ -15,9 +12,6 @@ import Footer from "./components/Footer";
 
 function App() {
   const currentPath = useLocation();
-
-  // openening the archive of note version 1, on the app load
-  // useEffect(useNotesDB, []);
 
   return (
     <div className='App'>

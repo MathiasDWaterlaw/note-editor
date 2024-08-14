@@ -3,6 +3,7 @@ import Dexie from "dexie";
 export const db = new Dexie("Notes_archive");
 db.version(2).stores({ notes: "++id, key, timestamp, title, content" });
 
+// add note
 export async function addNoteToDB(noteObject) {
   try {
     const id = await db.notes.add(noteObject);
@@ -11,6 +12,7 @@ export async function addNoteToDB(noteObject) {
   }
 }
 
+// delete note
 export function deleteNoteFromDB(id) {
   try {
     db.notes.delete(id);
@@ -19,6 +21,7 @@ export function deleteNoteFromDB(id) {
   }
 }
 
+// update note
 export function updateNoteInDB(id, updateValue) {
   try {
     db.notes.update(id, updateValue).then(function (updated) {
@@ -33,6 +36,7 @@ export function updateNoteInDB(id, updateValue) {
   }
 }
 
+// clear database
 export function deleteAllNotesDB() {
   try {
     db.notes.clear();
