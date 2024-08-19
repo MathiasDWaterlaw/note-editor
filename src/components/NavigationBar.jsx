@@ -1,4 +1,5 @@
 import "./NavigationBar.css";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,6 +14,7 @@ import {
 import { useNoteObject } from "../context/NoteContext";
 import useLocalStorage from "../custom-hooks/useLocalStorage";
 
+import Popup from "./Popup";
 import {
   addNoteToDB,
   deleteNoteFromDB,
@@ -95,6 +97,8 @@ function NoteEditorNav() {
   const emptyDraft = { state: false, draft_note: "" };
   const [setDraft] = useLocalStorage("draft");
 
+  const [savePopupState, setSavePopupState] = useState(false);
+
   const deleteNote = (_noteObject) => {
     if ("id" in _noteObject) {
       deleteNoteFromDB(_noteObject.id);
@@ -104,64 +108,74 @@ function NoteEditorNav() {
   };
 
   const saveNote = (_noteObject) => {
-    if ("id" in _noteObject) {
-      updateNoteInDB(_noteObject.id, {
-        title: _noteObject.title,
-        content: _noteObject.content,
-      });
-    } else {
-      addNoteToDB(_noteObject);
+    if (_noteObject.title !== "" || _noteObject.content !== "") {
+      if ("id" in _noteObject) {
+        updateNoteInDB(_noteObject.id, {
+          title: _noteObject.title,
+          content: _noteObject.content,
+        });
+      } else {
+        addNoteToDB(_noteObject);
+      }
+      setSavePopupState(true);
+      setDraft(emptyDraft);
+      setTimeout(() => {
+        setSavePopupState(false);
+      }, 700);
     }
-    setDraft(emptyDraft);
   };
 
   return (
-    <nav>
-      <ul>
-        <li>
-          <Link
-            to='/'
+    <>
+      <nav>
+        <ul>
+          <li>
+            <Link
+              to='/'
+              className='nav-item'
+              onClick={() => {
+                if ("id" in noteObject) {
+                  updateNoteInDB(noteObject.id, {
+                    title: noteObject.title,
+                    content: noteObject.content,
+                  });
+                }
+              }}
+            >
+              <FontAwesomeIcon icon={faHouse} size='xl' />
+            </Link>
+          </li>
+        </ul>
+
+        <ul className='nav-left-ul'>
+          {/* <li id='download-note-btn' className='nav-item'>
+            <FontAwesomeIcon icon={faFileArrowDown} size='xl' />
+            </li> */}
+
+          <li
+            id='delete-note-btn'
             className='nav-item'
             onClick={() => {
-              if ("id" in noteObject) {
-                updateNoteInDB(noteObject.id, {
-                  title: noteObject.title,
-                  content: noteObject.content,
-                });
-              }
+              deleteNote(noteObject);
             }}
           >
-            <FontAwesomeIcon icon={faHouse} size='xl' />
-          </Link>
-        </li>
-      </ul>
+            <FontAwesomeIcon icon={faTrashCan} size='xl' />
+          </li>
 
-      <ul className='nav-left-ul'>
-        {/* <li id='download-note-btn' className='nav-item'>
-            <FontAwesomeIcon icon={faFileArrowDown} size='xl' />
-          </li> */}
+          <li
+            id='save-note-btn'
+            className='nav-item'
+            onClick={() => {
+              saveNote(noteObject);
+            }}
+          >
+            <FontAwesomeIcon icon={faFileCirclePlus} size='xl' />
+          </li>
+        </ul>
+      </nav>
 
-        <li
-          id='delete-note-btn'
-          className='nav-item'
-          onClick={() => {
-            deleteNote(noteObject);
-          }}
-        >
-          <FontAwesomeIcon icon={faTrashCan} size='xl' />
-        </li>
-
-        <li
-          id='save-note-btn'
-          className='nav-item'
-          onClick={() => {
-            saveNote(noteObject);
-          }}
-        >
-          <FontAwesomeIcon icon={faFileCirclePlus} size='xl' />
-        </li>
-      </ul>
-    </nav>
+      <Popup trigger={savePopupState}>Note Saved!</Popup>
+    </>
   );
 }
 

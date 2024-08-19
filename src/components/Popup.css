@@ -1,0 +1,22 @@
+.Popup {
+  position: fixed;
+  top: 5rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-width: 355px;
+  height: 0;
+  background-color: var(--background-color);
+  color: var(--foreground-color);
+  overflow: hidden;
+}
+
+.Popup.active {
+  border: 1.5px solid var(--foreground-color);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  transition: padding 0.2s ease-in-out;
+}
