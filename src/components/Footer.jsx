@@ -32,7 +32,7 @@ function Footer() {
       <ul>
         <li>
           <Link to='/notes-archive' className='nav-item'>
-            All Notes
+            Archive
           </Link>
         </li>
 
