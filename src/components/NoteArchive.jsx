@@ -15,9 +15,14 @@ function NoteArchive() {
 
   if (allNotes?.length === 0) {
     return (
-      <div className='NoteArchive'>
-        <p>You don't have any saved note yet</p>
-      </div>
+      <>
+        <header>
+          <h2>- Archive -</h2>
+        </header>
+        <div className='NoteArchive'>
+          <p>You don't have any saved note yet</p>
+        </div>
+      </>
     );
   } else {
     return (

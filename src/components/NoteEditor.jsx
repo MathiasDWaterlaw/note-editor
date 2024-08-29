@@ -17,12 +17,17 @@ function NoteEditor() {
   // global context
   const [headingState, setHeadingState] = useHeading();
   const [paragraphState, setParagraphState] = useParagraph();
-  const { noteObject, setNoteObject } = useNoteObject();
+  const { noteObject, setNoteObject, createNewNoteObject } = useNoteObject();
 
+  const draft = getDraft();
   // on component load
   useEffect(() => {
-    const draft = getDraft();
+    if (draft.state === false && !("id" in noteObject)) {
+      setNoteObject(createNewNoteObject());
+    }
+  }, []);
 
+  useEffect(() => {
     if (draft) {
       if (draft.state) {
         setHeadingState(draft.draft_note.title);
@@ -53,7 +58,7 @@ function NoteEditor() {
     <div className='NoteEditor'>
       <TextareaAutosize
         className='input-area note-heading'
-        onChange={(e) => {
+        onInput={(e) => {
           setHeadingState(e.target.value);
           setNoteObject({
             ...noteObject,
@@ -68,7 +73,7 @@ function NoteEditor() {
 
       <TextareaAutosize
         className='input-area note-paragraph'
-        onChange={(e) => {
+        onInput={(e) => {
           setParagraphState(e.target.value);
           setNoteObject({
             ...noteObject,
